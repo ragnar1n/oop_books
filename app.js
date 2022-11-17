@@ -1,4 +1,5 @@
 const ui=new UI()
+const ls=new LS()
 
 const form=document.querySelector('#addBook')
 
@@ -14,10 +15,12 @@ function addBook(event){
     let author=authorInput.value
     let isbn=isbnInput.value
 
-    //create ul, li items and x link
+    //create book
     const book=new Book(title,author,isbn)
 
     ui.addBook(book)
+
+    ls.addBook(book)
 
     // tr.innerHTML=`
     // <td>${titleInput.value}</td>
