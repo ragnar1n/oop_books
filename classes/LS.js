@@ -17,4 +17,13 @@ class LS{
         books.push(book)
         this.setData('books',books)
     }
+    delBook(book){
+        let books = this.getData('books')
+        books.forEach(function(bookLS, index){
+            if(bookLS.title === book.title && bookLS.author === book.author && bookLS.isbn === book.isbn){
+                books.splice(index, 1)
+            }
+        })
+        this.setData('books', books)
+    }
 }

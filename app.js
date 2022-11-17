@@ -4,6 +4,24 @@ const ls=new LS()
 const form=document.querySelector('#addBook')
 
 form.addEventListener('submit', addBook)
+document.addEventListener('DOMContentLoaded',getBooksFromLS)
+document.addEventListener('click',delBook)
+
+function delBook(event){
+    if(event.target.textContent === 'x'){
+        const book = ui.getBook(event.target)
+        if(ui.delBook(event.target) === true){
+            ls.delBook(book)
+        }
+    }
+}
+
+function getBooksFromLS(){
+    let books=ls.getData('books')
+    books.forEach(function (book){
+        ui.addBook(book)
+    })
+}
 
 function addBook(event){
     // get form input values
@@ -21,18 +39,6 @@ function addBook(event){
     ui.addBook(book)
 
     ls.addBook(book)
-
-    // tr.innerHTML=`
-    // <td>${titleInput.value}</td>
-    // <td>${authorInput.value}</td>
-    // <td>${isbnInput.value}</td>
-    // <td><a class="secondary-content" href="#">x</a></td>`
-    //
-    //
-    // addBookToLS([titleInput.value,authorInput.value,isbnInput.value])
-    //
-    // bookList.appendChild(tr)
-
 
     //delete input value from form input fields
     titleInput.value=''
