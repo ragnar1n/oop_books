@@ -1,16 +1,29 @@
 class UI{
+    addUIElement(name, classname='', textcontent='', attributes={}){
+        //create element
+        const element=document.createElement(name)
+        //add css style class
+        if (classname !==''){
+            element.className=classname
+        }
+        //add text content
+        element.appendChild(document.createElement(textcontent))
+        //add attributes
+        if (Object.keys(attributes).length>0){
+            for (let key in attributes){
+                element.setAttribute(key,attributes[key])
+            }
+        }
+        return element
+    }
     addBook(book){
-        const tr=document.createElement('tr');
+        const tr=this.addUIElement('tr')
         for(let name in book){
-            let td=document.createElement('td')
-            let text=document.createElement(book[name])
-            td.appendChild(text)
+            let td=this.addUIElement('td','',book[name])
             tr.appendChild(td)
         }
-        let td=document.createElement('td')
-        const link=document.createElement('a')
-        link.setAttribute('href','#')
-        link.appendChild(document.createElement('x'))
+        let td=this.addUIElement('td')
+        const link=this.addUIElement('a','','x',{href:'#'})
         td.appendChild(link)
         tr.appendChild(td)
         const bookList=document.querySelector('#book-list')
